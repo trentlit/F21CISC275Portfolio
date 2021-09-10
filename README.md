@@ -15,4 +15,4 @@ TODO
 - Add a basic graphic of a stick figure, striking a training dummy with a reducing health bar with a stick upon button click
 - Add a button to upgrade the stick to a club, increasing score and reducing health bar by twice as much
 - Add further buttons to upgrade the stick further
-- Potentially add an auto-click option to purchase
+- (Maybe) Add an auto-click option for unlock
