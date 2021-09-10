@@ -4,7 +4,7 @@ E-mail: trentlit@udel.edu
 
 
 
-Still unsure on what to make, this is my current brainstorm! Currently working on using a hook to store scores.
+Still really unsure on what to make, but this is my current brainstorm! Currently working on using hooks to store scores.
 
 
 Changelog
