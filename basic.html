@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+  
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content
+        ="width=device-width, initial-scale=1.0">
+    <title>Online Dice Roller</title>
+    <style>
+        .header {
+            width: 80%;
+            margin: auto;
+            text-align: center;
+        }  
+        .dice {
+            text-align: center;
+            display: inline-block;
+            margin: 20px;
+        }
+        body {
+            background-color: #000000;
+        } 
+        h1 { 
+            margin: 30px;
+            font-family: "Comic Sans MS";
+            font-size: 4rem;
+            color: #4ecca3;
+            text-align: center;
+        }  
+        h3 { 
+            margin: 30px;
+            font-family: "Comic Sans MS";
+            font-size: 1.5rem;
+            color: #4ecca3;
+            text-align: center;
+        }  
+        p {
+            font-size: 2rem;
+            color: #4ecca3;
+            font-family: "Comic Sans MS";
+        }  
+        .butn {
+            background: #9c33b1;
+            font-family: "Comic Sans MS";
+            border-radius: 20px;
+            color: #000000;
+            font-size: 30px;
+            padding: 20px 30px 20px 30px;;
+        }
+        .butn:hover {
+            background: #711f81;
+        }
+        .quiz {
+            display: block;
+            padding: 5px;
+            color: #ffffff;  
+        }
+        .quiz button {
+            display: block;
+            background-color:#9c33b1;
+            color: #000000;
+        }
+        .quiz button:hover {
+            background: #711f81;
+        }
+        .quiz .correct {
+            padding: 5px;
+            color: #15a028;
+        }
+        .quiz .incorrect {
+            padding: 5px;
+            color: #c8ff00;
+        }
+    </style>
+</head> 
+<body onload= "rolldice()">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.4.2/react.js" charset="utf-8"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.4.2/react-dom.js" charset="utf-8"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.21.1/babel.min.js" charset="utf-8"></script>
+    <div class="header">
+        <h1>Online Dice Roller</h1>
+    </div>
+    <div class="header bottom">
+        <button type="button" class="butn" onClick="rolldice()">
+            Roll the Dice
+        </button>
+        <button type="button" class="butn" onClick="getsides()">
+            Change Number of Sides
+        </button>
+    </div>
+    <div class="display">
+        <h3>The last dice roll was a  <span id="displaytext"></span>.</h3>
+        <h3>The current number of sides for your dice is <span id="sidestext"></span>.</h3>
+    </div>
+    <div id="quiz">
+    </div>
+    <script type="text/babel">
+        class Quiz extends React.Component {
+            constructor(props) {
+                super(props);
+                this.state = {
+                    correct: null
+                };
+            }
+            answer(correct) {
+                this.setState({
+                    correct
+                });
+            }
+            render() {
+                let question = null;
+                if (this.state.correct === null) {
+                    question = <div>
+                        <button onClick={() => this.answer(false)}>a. Iran</button>
+                        <button onClick={() => this.answer(false)}>b. Egypt</button>
+                        <button onClick={() => this.answer(true)}>c. Turkey</button>
+                        <button onClick={() => this.answer(false)}>d. Mexico</button>
+                    </div>;
+                }
+                let answer = null;
+                if (this.state.correct === true) {
+                    answer = <div className="correct">Good job! Or maybe you already took this quiz before?</div>;
+                } else if (this.state.correct === false) {
+                    answer = <div className="incorrect">While being one of the older locations that dice have been found, it isn't the oldest!</div>;
+                }
+                
+                return <div className="quiz">
+                    <p>Pop quiz! Where were the oldest dice found?</p>
+                    {question}
+                    {answer}
+                </div>;
+            }
+        }
+        ReactDOM.render(
+            <Quiz />,
+            document.getElementById('quiz')
+        );
+        </script>
+    <script>
+        var sides = 6;
+        var diceresult = 1; 
+        function rolldice() {           
+            diceresult = Math.floor(Math.random() * sides) + 1;
+            document.getElementById("displaytext").innerHTML = diceresult;
+            document.getElementById("sidestext").innerHTML = sides;
+            return diceresult;              
+        }
+        function getsides() {
+            sides = prompt("How many sides do you want the dice to have? Please enter in numerals, not words. (i.e. 3 not three)");
+            parseInt(sides);
+            if (isNaN(sides)){
+                getsides();
+            }
+            document.getElementById("sidestext").innerHTML = sides;
+        }
+    </script>
+</body> 
+</html>
